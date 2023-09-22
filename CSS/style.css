@@ -1,0 +1,26 @@
+
+
+
+
+/* Respritory block */
+.respiratory-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.mechanically-vented {
+    margin-top: 10px; /* Add spacing between the dropdown and radio buttons */
+}
+/* ------------------------------------------------------------------------------ */
+
+
+
+/* cardio vascular block */
+.cardiovascular-system {
+    display: block; /* This is the default, but just to make it explicit */
+}
+
+.input-group {
+    margin-bottom: 10px; /* Add spacing between each label-input pair */
+}
+/* ------------------------------------------------------------------------------ */
