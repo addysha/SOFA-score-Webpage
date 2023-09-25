@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Add the same head content as index.php -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="js/script.js"></script>
 </head>
 <body>
     <header>
         <h1>SOFA Score Calculator</h1>
         <div class="patient-details" style="display: flex; flex-direction: row;">
             <!-- Display patient details -->
-            <p style="margin-right: 50px;">Patient Details:</p>
+            <p style="margin-right: 50px;">Patient Details</p>
             <p style="margin-right: 30px;">NHI: <?php echo $_POST['nhi']; ?></p>
             <p style="margin-right: 30px;">Surname: <?php echo $_POST['surname']; ?></p>
             <p>First Name: <?php echo $_POST['firstname']; ?></p>

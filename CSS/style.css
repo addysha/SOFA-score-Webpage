@@ -24,3 +24,10 @@
     margin-bottom: 10px; /* Add spacing between each label-input pair */
 }
 /* ------------------------------------------------------------------------------ */
+
+
+/* Define a CSS class for the error message */
+ /* Style for error messages */
+ .error-message {
+    color: red;
+}
