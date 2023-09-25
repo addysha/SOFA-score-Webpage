@@ -1,3 +1,19 @@
+<?php
+// Initialize variables to empty values
+$nhiValue = $surnameValue = $firstNameValue = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve user input from the form
+    $nhiValue = $_POST['nhi'];
+    $surnameValue = $_POST['surname'];
+    $firstNameValue = $_POST['firstname'];
+}
+
+// Set cookies with patient information
+setcookie("patient-nhi", $nhiValue, time() + 3600, "/");
+setcookie("patient-surname", $surnameValue, time() + 3600, "/");
+setcookie("patient-firstname", $firstNameValue, time() + 3600, "/");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,8 +42,5 @@
 
         <button type="button" onclick="validateForm()">Submit</button>
     </form>
-    <script>
-    
-    </script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,6 +50,17 @@
             <label for="glasgow-coma-scale">Glasgow Coma Scale Score:</label>
             <input type="range" id="glasgow-coma-scale" name="glasgow-coma-scale" min="0" max="15">
             <p id="glasgow-coma-score-label">0</p>
+            <?php
+            // Embed PHP variables within JavaScript
+            echo '<script>';
+            echo 'const glasgowComaScaleInput = document.getElementById(\'glasgow-coma-scale\');';
+            echo 'const glasgowComaScoreLabel = document.getElementById(\'glasgow-coma-score-label\');';
+
+            echo 'glasgowComaScaleInput.addEventListener(\'input\', function() {';
+            echo '    glasgowComaScoreLabel.textContent = this.value;';
+            echo '});';
+            echo '</script>';
+            ?>
 
         </div>
 
@@ -84,16 +96,14 @@
         <!-- Liver System -->
         <h2>Liver System</h2>
         <div class="Liver-system">
-            
             <label for="bilirubin-dropdown">Bilirubin (mg/dL or μmol/L):</label>
-                <select id="bilirubin" name="bilirubin">
+                <select id="bilirubin" name="liver-option">
                     <option value="option1">< 1.2 [< 20] </option>
                     <option value="option2">1.2 – 1.9 [20-32]</option>
                     <option value="option3">2.0–5.9 [33-101]</option>
                     <option value="option4">6.0–11.9 [102-204]</option>
                     <option value="option5"> 12.0 [> 204]</option>
                 </select>
-
         </div>
 
 
@@ -101,20 +111,21 @@
         <!-- Coagulation -->
         <h2>Coagulation</h2>
         <div class="Coagulation">
-
             <label for="platelets">Platelets (x103/μl):</label>
             <input type="text" id="platelets" name="platelets">
-
         </div>
-
 
         <!-- Renal System -->
         <h2>Renal System</h2>
         <div class="renal-system">
-
             <label for="creatinine">Creatinine (mg/dL or μmol/L) or Urine Output:</label>
-            <input type="text" id="creatinine" name="creatinine">
-
+            <select id="creatinine" name="creatinine">
+                <option value="option1">< 1.2 [< 110]</option>
+                <option value="option2">1.2–1.9 [110-170]</option>
+                <option value="option3">2.0–3.4 [171-299]</option>
+                <option value="option4">3.5–4.9 [300-440] (or < 500 ml/day)</option>
+                <option value="option5">> 5.0 [> 440] (or < 200 ml/day)</option>
+            </select>
         </div>
 
 
@@ -126,11 +137,7 @@
 
 
     <script> 
-     const glasgowComaScaleInput = document.getElementById('glasgow-coma-scale');
-     const glasgowComaScoreLabel = document.getElementById('glasgow-coma-score-label');
-     glasgowComaScaleInput.addEventListener('input', function() {
-     glasgowComaScoreLabel.textContent = this.value;
-     });
+    
     </script>
 </body>
 </html>
