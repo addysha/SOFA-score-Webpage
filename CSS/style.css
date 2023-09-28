@@ -1,33 +1,165 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 15px;
+
+}
+
+#container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+/* Form Styles */
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
 
 
 
+button[type="button"],
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 34px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 27px;
+}
 
-/* Respritory block */
-.respiratory-container {
+button[type="button"]:hover,
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Radio Button Label Styles */
+label[for="mechanically-vented-yes"],
+label[for="mechanically-vented-no"] {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 10px; /* Add margin for spacing between the label and radio button */
 }
 
-.mechanically-vented {
-    margin-top: 10px; /* Add spacing between the dropdown and radio buttons */
+
+.error {
+    border: 1px solid red;
 }
-/* ------------------------------------------------------------------------------ */
 
+/* Remove red border when input is valid */
+input:valid {
+    border: 1px solid #ccc; /* Change the border color to your desired color */
+}
 
+/* Error Message Styles */
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
 
-/* cardio vascular block */
+/* Additional Styling for Specific Sections */
+
+/* Respiratory System Styles */
+.respiratory-system {
+    margin-top: 20px;
+}
+
+/* Cardiovascular System Styles */
 .cardiovascular-system {
-    display: block; /* This is the default, but just to make it explicit */
+    margin-top: 20px;
 }
 
 .input-group {
-    margin-bottom: 10px; /* Add spacing between each label-input pair */
+    display: flex;
+    justify-content: flex-start;
 }
-/* ------------------------------------------------------------------------------ */
+
+/* Liver System Styles */
+.Liver-system {
+    margin-top: 20px;
+}
+
+/* Coagulation Styles */
+.Coagulation {
+    margin-top: 20px;
+}
+
+/* Renal System Styles */
+.renal-system {
+    margin-top: 20px;
+}
+
+.patient-details {
+    margin-right: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: center;
+    flex-direction: row;
+    background: #EFB495;
+}
 
 
-/* Define a CSS class for the error message */
- /* Style for error messages */
- .error-message {
-    color: red;
+#Patient-info {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #EFB495;
+    padding: 10px;
+
+}
+
+#Patient-info p {
+    margin: 0; /* Remove default paragraph margins */
+}
+
+.Points-container {
+    margin-top: 20px; /* Adjust the margin-top value as needed to control the spacing */
+}
+
+.link {
+    text-align: left;
+    margin-top: 80px; /* Adjust the margin-top value as needed to control spacing */
+}
+
+.link a {
+    color: blue; /* Blue color for the link text */
+    text-decoration: underline; /* Underline the link text */
+}
+
+.link a:hover {
+    text-decoration: none; /* Remove underline on hover if desired */
+}
+
+#log-in {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    background: #EF9595;
+    padding: 20px;
+    padding-right: 200px;
+    border-radius: 10px;
 }

@@ -1,245 +1,193 @@
-<?php
-// Function to calculate points based on Glasgow Coma Scale Score
-function calculateGlasgowComaScalePoints($score) {
-    $points = 0; // Initialize points variable
-
-    // Calculate points based on the Glasgow Coma Scale Score
-    if ($score === 15) {
-        $points = 0;
-    } elseif ($score >= 13 && $score <= 14) {
-        $points = 1;
-    } elseif ($score >= 10 && $score <= 12) {
-        $points = 2;
-    } elseif ($score >= 6 && $score <= 9) {
-        $points = 3;
-    } elseif ($score < 6) {
-        $points = 4;
-    }
-
-    return $points;
-}
-
-function calculateRespiratoryPoints($selectedOption, $isMechanicallyVented) {
-    $points = 0; // Initialize points variable
-
-    // Calculate points based on the selected option and mechanical ventilation
-    if ($selectedOption === 'option1') {
-        $points = 0;
-    } elseif ($selectedOption === 'option2') {
-        $points = 1;
-    } elseif ($selectedOption === 'option3') {
-        $points = 2;
-    } elseif ($selectedOption === 'option4') {
-        // If < 200 (26.7) and mechanically vented, check if mechanically vented
-        $points = $isMechanicallyVented ? 3 : 0;
-    } elseif ($selectedOption === 'option5') {
-        // If < 100 (13.3) and mechanically vented, check if mechanically vented
-        $points = $isMechanicallyVented ? 4 : 0;
-    }
-
-    return $points;
-}
-
-// Function to calculate liver points in PHP
-function calculateLiverPoints($selectedOption) {
-    $points = 0; // Initialize points variable
-
-    // Calculate points based on the selected option
-    switch ($selectedOption) {
-        case 'option1':
-            $points = 0;
-            break;
-        case 'option2':
-            $points = 1;
-            break;
-        case 'option3':
-            $points = 2;
-            break;
-        case 'option4':
-            $points = 3;
-            break;
-        case 'option5':
-            $points = 4;
-            break;
-        default:
-            // Handle any unexpected or default case here
-            break;
-    }
-
-    return $points;
-}
-
-function calculateRenalPoints($selectedOption) {
-    // Initialize points variable
-    $points = 0;
-
-    // Assign points based on the selected option
-    switch ($selectedOption) {
-        case "option1":
-            $points = 0;
-            break;
-        case "option2":
-            $points = 1;
-            break;
-        case "option3":
-            $points = 2;
-            break;
-        case "option4":
-            $points = 3;
-            break;
-        case "option5":
-            $points = 4;
-            break;
-        default:
-            // Handle any unexpected or default case here
-            break;
-    }
-
-    // Return the calculated points
-    return $points;
-}
-
-function calculateCoagulationPoints($plateletsValue) {
-    // Initialize points variable
-    $points = 0;
-
-    // Convert the platelets value to a number (float)
-    $plateletsValue = floatval($plateletsValue);
-
-    // Assign points based on the platelets value
-    if (is_numeric($plateletsValue)) {
-        if ($plateletsValue >= 150) {
-            $points = 0;
-        } else if ($plateletsValue < 150 && $plateletsValue >= 100) {
-            $points = 1;
-        } else if ($plateletsValue < 100 && $plateletsValue >= 50) {
-            $points = 2;
-        } else if ($plateletsValue < 50 && $plateletsValue >= 20) {
-            $points = 3;
-        } else {
-            $points = 4;
-        }
-    }
-
-    // Return the calculated points
-    return $points;
-}
-
-function calculateCardiovascularPoints($mapInput, $dopamineInput, $dobutamineInput, $epinephrineInput, $norepinephrineInput) {
-    // Initialize points variable
-    $points = 0;
-
-    // Check Mean Atrial Pressure (MAP)
-    if (!is_nan($mapInput) && $mapInput >= 70) {
-        $points = 0;
-    }
-
-    // Check Dopamine and Dobutamine
-    if (!is_nan($dopamineInput) && !is_nan($dobutamineInput)) {
-        if ($dopamineInput <= 5 || $dobutamineInput <= 5) {
-            $points = 2;
-        }
-    }
-
-    // Check Dopamine, Epinephrine, and Norepinephrine
-    if (!is_nan($dopamineInput) && !is_nan($epinephrineInput) && !is_nan($norepinephrineInput)) {
-        if ($dopamineInput > 5 && $epinephrineInput <= 0.1 && $norepinephrineInput <= 0.1) {
-            $points = 3;
-        }
-    }
-
-    // Check Dopamine, Epinephrine, and Norepinephrine for 4 points
-    if (!is_nan($dopamineInput) && !is_nan($epinephrineInput) && !is_nan($norepinephrineInput)) {
-        if ($dopamineInput > 15 || $epinephrineInput > 0.1 || $norepinephrineInput > 0.1) {
-            $points = 4;
-        }
-    }
-
-    // Return the calculated points
-    return $points;
-}
-
-
-function calculateTotalPoints() {
-    // Get the Glasgow Coma Scale Score
-    $glasgowComaScaleInput = $_POST['glasgow-coma-scale'];
-    $score = intval($glasgowComaScaleInput);
-
-    // Calculate points for other systems (Respiratory, Liver, Renal, Coagulation, Cardiovascular)
-    $selectedRespiratoryOption = $_POST['respiratory-option']; // Assuming you have a 'respiratory-option' field in your form
-    $isMechanicallyVented = isset($_POST['mechanically-vented']) ? true : false; // Assuming you have a 'mechanically-vented' checkbox in your form
-    $respiratoryPoints = calculateRespiratoryPoints($selectedRespiratoryOption, $isMechanicallyVented);
-
-    $selectedLiverOption = $_POST['liver-option']; // Assuming you have a 'liver-option' field in your form
-    $liverPoints = calculateLiverPoints($selectedLiverOption);
-
-    $selectedRenalOption = $_POST['renal-option']; // Assuming you have a 'renal-option' field in your form
-    $renalPoints = calculateRenalPoints($selectedRenalOption);
-
-    $plateletsValue = $_POST['platelets']; // Assuming you have a 'platelets' field in your form
-    $coagulationPoints = calculateCoagulationPoints($plateletsValue);
-
-    $mapInput = floatval($_POST['map-input']); // Assuming you have a 'map-input' field in your form
-    $dopamineInput = floatval($_POST['dopamine-input']); // Assuming you have a 'dopamine-input' field in your form
-    $dobutamineInput = floatval($_POST['dobutamine-input']); // Assuming you have a 'dobutamine-input' field in your form
-    $epinephrineInput = floatval($_POST['epinephrine-input']); // Assuming you have an 'epinephrine-input' field in your form
-    $norepinephrineInput = floatval($_POST['norepinephrine-input']); // Assuming you have a 'norepinephrine-input' field in your form
-    $cardiovascularPoints = calculateCardiovascularPoints($mapInput, $dopamineInput, $dobutamineInput, $epinephrineInput, $norepinephrineInput);
-
-    // Calculate points for Glasgow Coma Scale
-    $glasgowComaPoints = calculateGlasgowComaScalePoints($score);
-
-    // Sum up the points from all systems
-    $totalPoints = $glasgowComaPoints + $respiratoryPoints + $liverPoints + $renalPoints + $coagulationPoints + $cardiovascularPoints;
-
-    // Display the total points on the results.php page
-    echo $totalPoints;
-    
-}
-?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CSS/style.css">
-    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="JS/script.js"></script>
 </head>
 <body>
+<?php
+    $points = 0;
+    $respiratoryPoints = 0;
+    $nervousPoints = 0;
+    $cardiovascularPoints=0;
+    $liverPoints=0;
+    $coagulationPoints=0;
+    $kidneyPoints=0;
+    
+    
+
+    if (isset($_COOKIE["NHI-Number"]) && isset($_COOKIE["patient-surname"]) && isset($_COOKIE["patient-firstname"])) {
+        $fname = $_COOKIE["patient-firstname"];
+        $lname = $_COOKIE["patient-surname"];
+        $nhi = $_COOKIE["NHI-Number"];
+    } else {
+        $fname = '';
+        $lname = '';
+        $nhi = '';
+    }
+    
+    // Validate and set the cookies when the form is submitted
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $nhiRegex = '/^[A-Z0-9]+$/'; // Modify the regex as needed
+        if (isset($_POST['nhi']) && preg_match($nhiRegex, $_POST['nhi'])) {
+            $nhi = $_POST['nhi'];
+            setcookie("NHI-Number", $nhi, time() + (86400 * 30), "/");
+        }
+    
+        if (isset($_POST['surname'])) {
+            $lname = $_POST['surname'];
+            setcookie("patient-surname", $lname, time() + (86400 * 30), "/");
+        }
+    
+        if (isset($_POST['firstname'])) {
+            $fname = $_POST['firstname'];
+            setcookie("patient-firstname", $fname, time() + (86400 * 30), "/");
+        }
+    }
+
+    
+
+    // get the information from the sofa.php file
+    $respiratory = $_POST["respiratory-option"];
+    $radio_respi = $_POST["mechanically-vented"];
+    $nervous = $_POST["glasgow-coma-scale"];
+
+    $map = $_POST["mean-atrial-pressure"];
+    $dopamine = $_POST["dopamine"];
+    $dobutamine = $_POST["dobutamine"];
+    $epinephrine = $_POST["epinephrine"];
+    $norepinephrine = $_POST["norepinephrine"];
+
+    $liver = $_POST["liver-option"];
+    $coagulation = $_POST["platelets"];
+    $kidney = $_POST["creatinine"];
+    
+
+    // Respritory
+    // Define an array to map respiratory options to points
+    $respiratoryPointsMap = [
+        'option1-res' => 0,
+        'option2-res' => 1,
+        'option3-res' => 2,
+        'option4-res' => 3,
+        'option5-res' => 4
+    ];
+    // Check if the selected option exists in the mapping array, and assign points accordingly
+    if (isset($respiratoryPointsMap[$respiratory])) {
+        $respiratoryPoints = $respiratoryPointsMap[$respiratory];
+    } 
+
+    
+
+    //Nervous system
+    if ($nervous == 15) {
+        $nervousPoints = 0;
+    } else if ($nervous >= 13 && $nervous <= 14) {
+        $nervousPoints = 1;
+    } else if ($nervous >= 10 && $nervous <= 12) {
+        $nervousPoints = 2;
+    } else if ($nervous >= 6 && $nervous <= 9) {
+        $nervousPoints = 3;
+    } else {
+        $nervousPoints = 4;
+    }
+    
+   //Cardio Logic
+   if ($dopamine > 15 || $epinephrine > 0.1 || $norepinephrine > 0.1){
+        $cardiovascularPoints = 4;
+    }else if ($dopamine > 5 || ( $epinephrine != "" && $epinephrine <= 0.1) || ($norepinephrine != "" && $norepinephrine <=0.1)){
+        $cardiovascularPoints = 3;
+    } else if(($dopamine != "" && $dopamine <= 5) || ($dopamine != "" && $dopamine != 0)){
+        $cardiovascularPoints = 2;
+    } else if ($map < 70){
+        $cardiovascularPoints = 1;
+    } else if ($map >= 70){
+        $cardiovascularPoints = 0;
+    }
+
+
+    //Liver
+    // Define an associative array to map the selected option to points
+    $liverPointsMap = [
+        'option1-liv' => 0,
+        'option2-liv' => 1,
+        'option3-liv' => 2,
+        'option4-liv' => 3,
+        'option5-liv' => 4
+    ];
+
+    // Check if the selected option exists in the mapping array, and assign points accordingly
+    if (isset($liverPointsMap[$liver])) {
+        $liverPoints = $liverPointsMap[$liver];
+    } 
+
+
+    //Coagulation points
+    if ($coagulation >= 150) {
+        $coagulationPoints = 0;
+    } else if ($coagulation < 20) {
+        $coagulationPoints = 4;
+    } else if ($coagulation < 50) {
+        $coagulationPoints = 3;
+    } else if ($coagulation < 100) {
+        $coagulationPoints = 2;
+    } else if ($coagulation < 150) {
+        $coagulationPoints = 1;
+    }
+    
+
+    //Kidney
+    if ($kidney == "option1 ren") {
+        $kidneyPoints = 0;
+    } else if ($kidney == "option2 ren") {
+        $kidneyPoints = 1;
+    } else if ($kidney == "option3 ren") {
+        $kidneyPoints = 2;
+    } else if ($kidney == "option4 ren") {
+        $kidneyPoints = 3;
+    } else if ($kidney == "option5 ren") {
+        $kidneyPoints = 4;
+    }
+
+    $points = $respiratoryPoints + $cardiovascularPoints + $nervousPoints + $liverPoints + $coagulationPoints + $kidneyPoints
+?>
+
+<div id="container">
     <header>
-        <h1>SOFA Score Calculator</h1>
-        <!-- Display patient details -->
-        <!-- Display SOFA score components and final score -->
-        <p>Patient Details:</p>
-        <p>NHI: <?php echo isset($_COOKIE['patient-nhi']) ? $_COOKIE['patient-nhi'] : ''; ?></p>
-        <p>Surname: <?php echo isset($_COOKIE['patient-surname']) ? $_COOKIE['patient-surname'] : ''; ?></p>
-        <p>First Name: <?php echo isset($_COOKIE['patient-firstname']) ? $_COOKIE['patient-firstname'] : ''; ?></p>
+        <h1>SOFA Score Results</h1>
+        <div id="Patient-info">
+            <p style="margin-right: 30px;">Patient Details</p>
+            <p style="margin-right: 30px;">NHI: <?php echo strtoupper($nhi)?> </p>
+            <p style="margin-right: 30px;">Name: <?php echo ucfirst(strtolower($fname));
+                      echo " ";
+                      echo ucfirst(strtolower($lname))?></p>
+            
+        </div>
     </header>
     <section>
-        <h2>SOFA Score Components</h2>
+        <div class ="Points-container">
+            <h2>SOFA Score Components</h2>
+            <h3>Total points: <?php echo $points;?>/24 </h3>
 
-        <h2>Respiratory System</h2>
-        <p>Respiratory Score: <?php echo $respiratoryPoints; ?></p>
+            <ul>
+                <li>Respritory +<?php echo $respiratoryPoints;?> points</li>
+                <li>Cardiovascular System +<?php echo $cardiovascularPoints;?> points</li>
+                <li>Nervous System +<?php echo $nervousPoints;?> points</li>
+                <li>Liver +<?php echo $liverPoints;?> points</li>
+                <li>Kidneys +<?php echo $kidneyPoints;?> points</li>
+                <li>Coagulation +<?php echo $coagulationPoints;?> points</li>
 
-        <h2>Nervous System</h2>
-        <p>Nervous System Score:<?php echo $nervousPoints; ?> </p>
-        
-        <h2>Cardiovascular System</h2>
-        <p>Cardiovascular System Score:  <?php echo $cardiovascularPoints; ?></p>
-        
-        <h2>Liver System</h2>
-        <p>Liver System Score:  <?php echo $liverPoints; ?> </p>
-        
-        <h2>Coagulation</h2>
-        <p>Coagulation  Score: <?php echo $coagulationPoints; ?></p>
-        
-        <h2>Renal System</h2>
-        <p>Renal System Score:  <?php echo $renalPoints; ?></p>
-
-        <p> Your SOFA Score was: <?php echo $totalPoints; ?> </p>
+            </ul>
+            
+        </div>
     </section>
+    <!-- Add this at the bottom of your HTML body -->
+        <div class="link">
+             Click on this link to see how your score was calculated: <a href="https://en.wikipedia.org/wiki/SOFA_score" target="_blank">"https://en.wikipedia.org/wiki/SOFA_score"</a>
+        </div>
+</div>
 </body>
 </html>
