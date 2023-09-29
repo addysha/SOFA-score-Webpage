@@ -8,7 +8,6 @@
     <title>SOFA Score Calculator</title>
 </head>
 <body>
-
 <?php
     if (isset($_COOKIE["NHI-Number"]) && isset($_COOKIE["patient-surname"]) && isset($_COOKIE["patient-firstname"])) {
         $fname = $_COOKIE["patient-firstname"];
@@ -39,7 +38,6 @@
         }
     }
 ?>
-
 <div id ="container">
     <header>
         <h1>SOFA Score Calculator</h1>    

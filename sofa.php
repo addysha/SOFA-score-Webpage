@@ -38,8 +38,6 @@
             }
         }
     ?>
-
-
     <header>
         <h1>SOFA Score Calculator</h1>
         <div class="patient-details" style="display: flex;justify-content: center; background: #1063b696;">
@@ -51,9 +49,6 @@
         </div>
     </header>
     <form action="result.php" method="post" onsubmit="return ValidateCardio();">
-        
-  
-        
         <!-- Respiratory System -->
         <h2 style="background: #95c2efa1;;padding: 10px;">Respiratory System</h2>
         <div class="respritory-system"><label for="respiratory-dropdown">PaO2/FiO2 [mmHg (kPa)]:</label>
@@ -72,14 +67,9 @@
                     <input type="radio" id="mechanically-vented-no" name="mechanically-vented" value="no">
                     <label for="mechanically-vented-no">No</label>
                 <div class="mechanically-vented">
-        
-            
-        
-
         <!-- Nervous System -->
         <h2 style="background: #95c2efa1;;padding: 10px;">Nervous System</h2>
         <div class="Nervous-system">
-
             <label for="glasgow-coma-scale">Glasgow Coma Scale Score:</label>
             <input type="range" id="glasgow-coma-scale" name="glasgow-coma-scale" min="0" max="15" style="width: 210px;">
             <p id="glasgow-coma-score-label">0</p>
@@ -94,9 +84,7 @@
             echo '});';
             echo '</script>';
             ?>
-
         </div>
-
         <!-- Cardiovascular System -->
         <h2 style="background: #95c2efa1;;padding: 10px;">Cardiovascular System</h2>
         <div class="Cardiovascular-system">
@@ -124,11 +112,6 @@
             <!-- Error message container for cardiovascular section -->
             <div class="error-message" id="error-message"></div>
         </div>
-
-
-        <div></div>
-
-
         <!-- Liver System -->
         <h2 style="background: #95c2efa1;;padding: 10px;">Liver System</h2>
         <div class="Liver-system">
@@ -141,9 +124,6 @@
                     <option value="option5-liv"> 12.0 [> 204]</option>
                 </select>
         </div>
-
-
-
         <!-- Coagulation -->
         <h2 style="background: #95c2efa1;;padding: 10px;">Coagulation</h2>
         <div class="Coagulation">
@@ -151,7 +131,6 @@
             <input type="number" id="platelets" name="platelets" style="padding: 5px;" min="0">
             <div class="error-message-coagulation" id="error-message-coagulation"></div>
         </div>
-
         <!-- Renal System -->
         <h2 style="background: #95c2efa1;;padding: 10px;">Renal System</h2>
         <div class="renal-system">
@@ -164,13 +143,8 @@
                 <option value="option5 ren">> 5.0 [> 440] (or < 200 ml/day)</option>
             </select>
         </div>
-
-
         <!-- Add a submit button -->
         <input type="submit" value="Calculate SOFA Score" onclick="ValidateCardio()" >
-
-
     </form>
-
 </body>
 </html>

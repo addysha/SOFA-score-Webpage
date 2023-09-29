@@ -9,16 +9,14 @@
 </head>
 <body>
 <?php
+    $nervousPoints = 0;
     $points = 0;
     $respiratoryPoints = 0;
-    $nervousPoints = 0;
-    $cardiovascularPoints=0;
-    $liverPoints=0;
     $coagulationPoints=0;
+    $cardiovascularPoints=0;
     $kidneyPoints=0;
+    $liverPoints=0;
     
-    
-
     if (isset($_COOKIE["NHI-Number"]) && isset($_COOKIE["patient-surname"]) && isset($_COOKIE["patient-firstname"])) {
         $fname = $_COOKIE["patient-firstname"];
         $lname = $_COOKIE["patient-surname"];
@@ -48,22 +46,18 @@
         }
     }
 
-    
-
     // get the information from the sofa.php file
-    $respiratory = $_POST["respiratory-option"];
-    $radio_respi = $_POST["mechanically-vented"];
     $nervous = $_POST["glasgow-coma-scale"];
-
+    $epinephrine = $_POST["epinephrine"];
     $map = $_POST["mean-atrial-pressure"];
     $dopamine = $_POST["dopamine"];
-    $dobutamine = $_POST["dobutamine"];
-    $epinephrine = $_POST["epinephrine"];
-    $norepinephrine = $_POST["norepinephrine"];
-
+    $radio_respi = $_POST["mechanically-vented"];
     $liver = $_POST["liver-option"];
-    $coagulation = $_POST["platelets"];
     $kidney = $_POST["creatinine"];
+    $coagulation = $_POST["platelets"];
+    $dobutamine = $_POST["dobutamine"];
+    $norepinephrine = $_POST["norepinephrine"];
+    $respiratory = $_POST["respiratory-option"];
     
 
     // Respritory
@@ -79,8 +73,6 @@
     if (isset($respiratoryPointsMap[$respiratory])) {
         $respiratoryPoints = $respiratoryPointsMap[$respiratory];
     } 
-
-    
 
     //Nervous system
     if ($nervous == 15) {
@@ -138,7 +130,6 @@
         $coagulationPoints = 1;
     }
     
-
     //Kidney
     if ($kidney == "option1 ren") {
         $kidneyPoints = 0;
@@ -154,7 +145,6 @@
 
     $points = $respiratoryPoints + $cardiovascularPoints + $nervousPoints + $liverPoints + $coagulationPoints + $kidneyPoints
 ?>
-
 <div id="container">
     <header>
         <h1>SOFA Score Results</h1>
@@ -164,7 +154,6 @@
             <p style="margin-right: 30px;">Name: <?php echo ucfirst(strtolower($fname));
                       echo " ";
                       echo ucfirst(strtolower($lname))?></p>
-            
         </div>
     </header>
     <section>
@@ -180,10 +169,8 @@
                 <li>Coagulation +<?php echo $coagulationPoints;?> points</li>
 
             </ul>
-            
         </div>
     </section>
-    <!-- Add this at the bottom of your HTML body -->
         <div class="link">
              Click on this link to see how your score was calculated: <a href="https://en.wikipedia.org/wiki/SOFA_score" target="_blank">"https://en.wikipedia.org/wiki/SOFA_score"</a>
         </div>
@@ -199,15 +186,14 @@
                 </div>
             </div>
 </div>
-
 <script>
     function goBack() {
-    window.history.back();
-}
-function restart() {
-    // Redirect to the index.php page
-    window.location.href = 'index.php';
-}
+        window.history.back();
+    }
+    function restart() {
+        // Redirect to the index.php page
+        window.location.href = 'index.php';
+    }
 </script>
 </body>
 </html>
