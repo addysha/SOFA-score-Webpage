@@ -58,49 +58,67 @@ function validateForm() {
 //===================================================================================================
 
 function ValidateCardio() {
-        // Get the values of the cardiovascular input fields
-        var meanAtrialPressure = document.getElementById("mean-atrial-pressure");
-        var dopamine = document.getElementById("dopamine");
-        var dobutamine = document.getElementById("dobutamine");
-        var epinephrine = document.getElementById("epinephrine");
-        var norepinephrine = document.getElementById("norepinephrine");
-    
-        // Initialize an error message variable
-        var errorMessage = "";
-    
-        // Check if all the fields in the Cardiovascular System section are empty
-        if (
-            meanAtrialPressure.value.trim() === "" &&
-            dopamine.value.trim() === "" &&
-            dobutamine.value.trim() === "" &&
-            epinephrine.value.trim() === "" &&
-            norepinephrine.value.trim() === ""
-        ) {
-            errorMessage += "<div>Please fill at least one of the fields.</div>";
-    
-            // Add red border to all input fields
-            meanAtrialPressure.style.border = "1px solid red";
-            dopamine.style.border = "1px solid red";
-            dobutamine.style.border = "1px solid red";
-            epinephrine.style.border = "1px solid red";
-            norepinephrine.style.border = "1px solid red";
-        } else {
-            // Remove red border from all input fields if there are no errors
-            meanAtrialPressure.style.border = "";
-            dopamine.style.border = "";
-            dobutamine.style.border = "";
-            epinephrine.style.border = "";
-            norepinephrine.style.border = "";
-        }
-    
-        // Display error messages in the cardiovascular error-message container
-        var cardiovascularErrorMessageContainer = document.getElementById("error-message");
-        cardiovascularErrorMessageContainer.innerHTML = errorMessage;
-    
-        // Prevent form submission if there are validation errors
-        if (errorMessage !== "") {
-            return false;
-        }
-    
-        return true; // Return true if there are no validation errors
+    // Get the values of the cardiovascular input fields
+    var meanAtrialPressure = document.getElementById("mean-atrial-pressure");
+    var dopamine = document.getElementById("dopamine");
+    var dobutamine = document.getElementById("dobutamine");
+    var epinephrine = document.getElementById("epinephrine");
+    var norepinephrine = document.getElementById("norepinephrine");
+    var coagulation = document.getElementById("platelets");
+    // Initialize error message variables
+    var errorMessageCardio = "";
+    var errorMessageCoagulation = "";
+
+    // Check if all the fields in the Cardiovascular System section are empty
+    if (
+        meanAtrialPressure.value.trim() === "" &&
+        dopamine.value.trim() === "" &&
+        dobutamine.value.trim() === "" &&
+        epinephrine.value.trim() === "" &&
+        norepinephrine.value.trim() === ""
+    ) {
+        errorMessageCardio += "<div>Please fill at least one of the fields.</div>";
+        // Add red border to all input fields in Cardiovascular section
+        meanAtrialPressure.style.border = "1px solid red";
+        dopamine.style.border = "1px solid red";
+        dobutamine.style.border = "1px solid red";
+        epinephrine.style.border = "1px solid red";
+        norepinephrine.style.border = "1px solid red";
+        coagulation.style.border = "";
+    } else {
+        // Remove red border from all input fields in Cardiovascular section if there are no errors
+        meanAtrialPressure.style.border = "";
+        dopamine.style.border = "";
+        dobutamine.style.border = "";
+        epinephrine.style.border = "";
+        norepinephrine.style.border = "";
+        coagulation.style.border = "";
+    }
+
+    // Check if the "Coagulation" field is empty
+    if (coagulation.value.trim() === "") {
+        errorMessageCoagulation += "<div>Please fill in the Coagulation field.</div>";
+        // Add red border to Coagulation field
+        coagulation.style.border = "1px solid red";
+    } else {
+        // Remove red border from Coagulation field if there are no errors
+        coagulation.style.border = "";
+    }
+
+    // Display error messages in the cardiovascular error-message container
+    var cardiovascularErrorMessageContainer = document.getElementById("error-message");
+    cardiovascularErrorMessageContainer.innerHTML = errorMessageCardio;
+
+    // Display error messages in the Coagulation error-message container
+    var coagulationErrorMessageContainer = document.getElementById("error-message-coagulation");
+    coagulationErrorMessageContainer.innerHTML = errorMessageCoagulation;
+
+    // Prevent form submission if there are validation errors in either section
+    if (errorMessageCardio !== "" || errorMessageCoagulation !== "") {
+        return false;
+    }
+
+    return true; // Return true if there are no validation errors
 }
+
+

@@ -42,7 +42,7 @@
 
     <header>
         <h1>SOFA Score Calculator</h1>
-        <div class="patient-details" style="display: flex;justify-content: center;">
+        <div class="patient-details" style="display: flex;justify-content: center; background: #1063b696;">
             <!-- Display patient details -->
             <p style="margin-right: 50px;">Patient Details</p>
             <p style="margin-right: 30px;">NHI: <?php echo $_POST['nhi']; ?></p>
@@ -55,7 +55,7 @@
   
         
         <!-- Respiratory System -->
-        <h2 style="background: #FFE5E5;">Respiratory System</h2>
+        <h2 style="background: #95c2efa1;;padding: 10px;">Respiratory System</h2>
         <div class="respritory-system"><label for="respiratory-dropdown">PaO2/FiO2 [mmHg (kPa)]:</label>
             <select id="respiratory-dropdown" name="respiratory-option" style="margin-bottom: 30px; padding: 5px;">
             <option value="option1-res">≥ 400 (53.3)</option>
@@ -77,7 +77,7 @@
         
 
         <!-- Nervous System -->
-        <h2 style="background: #FFE5E5;">Nervous System</h2>
+        <h2 style="background: #95c2efa1;;padding: 10px;">Nervous System</h2>
         <div class="Nervous-system">
 
             <label for="glasgow-coma-scale">Glasgow Coma Scale Score:</label>
@@ -98,28 +98,28 @@
         </div>
 
         <!-- Cardiovascular System -->
-        <h2 style="background: #FFE5E5;">Cardiovascular System</h2>
+        <h2 style="background: #95c2efa1;;padding: 10px;">Cardiovascular System</h2>
         <div class="Cardiovascular-system">
 
             <div class="input-group">
                 <label for="mean-atrial-pressure">Mean Atrial Pressure (mmHg):</label>
-                <input type="number" id="mean-atrial-pressure" name="mean-atrial-pressure" style="margin-left: 10px;">
+                <input type="number" id="mean-atrial-pressure" name="mean-atrial-pressure" style="margin-left: 10px;" min="0">
             </div>
             <div class="input-group">
                 <label for="dopamine">Dopamine (mcg/kg/min):</label>
-                <input type="number" id="dopamine" name="dopamine" style="margin-left: 51px;">
+                <input type="number" id="dopamine" name="dopamine" style="margin-left: 51px;" min="0">
             </div>
             <div class="input-group">
                 <label for="dobutamine">Dobutamine (mcg/kg/min):</label>
-                <input type="number" id="dobutamine" name="dobutamine" style="margin-left: 37.5px;">
+                <input type="number" id="dobutamine" name="dobutamine" style="margin-left: 37.5px;" min="0">
             </div>
             <div class="input-group">
                 <label for="epinephrine">Epinephrine (mcg/kg/min):</label>
-                <input type="number" id="epinephrine" name="epinephrine" style="margin-left: 38.5px;">
+                <input type="number" id="epinephrine" name="epinephrine" style="margin-left: 38.5px;" min="0">
             </div>
             <div class="input-group">
                 <label for="norepinephrine">Norepinephrine (mcg/kg/min):</label>
-                <input type="number" id="norepinephrine" name="norepinephrine" style="margin-left: 14.5px;">
+                <input type="number" id="norepinephrine" name="norepinephrine" style="margin-left: 14.5px;" min="0">
             </div>
             <!-- Error message container for cardiovascular section -->
             <div class="error-message" id="error-message"></div>
@@ -130,7 +130,7 @@
 
 
         <!-- Liver System -->
-        <h2 style="background: #FFE5E5;">Liver System</h2>
+        <h2 style="background: #95c2efa1;;padding: 10px;">Liver System</h2>
         <div class="Liver-system">
             <label for="bilirubin-dropdown">Bilirubin (mg/dL or μmol/L):</label>
                 <select id="bilirubin" name="liver-option" style="padding: 5px;">
@@ -145,14 +145,15 @@
 
 
         <!-- Coagulation -->
-        <h2 style="background: #FFE5E5;">Coagulation</h2>
+        <h2 style="background: #95c2efa1;;padding: 10px;">Coagulation</h2>
         <div class="Coagulation">
             <label for="platelets">Platelets (x103/μl):</label>
-            <input type="number" id="platelets" name="platelets" style="padding: 5px;">
+            <input type="number" id="platelets" name="platelets" style="padding: 5px;" min="0">
+            <div class="error-message-coagulation" id="error-message-coagulation"></div>
         </div>
 
         <!-- Renal System -->
-        <h2 style="background: #FFE5E5;">Renal System</h2>
+        <h2 style="background: #95c2efa1;;padding: 10px;">Renal System</h2>
         <div class="renal-system">
             <label for="creatinine">Creatinine (mg/dL or μmol/L) or Urine Output:</label>
             <select id="creatinine" name="creatinine" style="padding: 5px;">

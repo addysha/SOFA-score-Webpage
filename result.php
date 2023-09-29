@@ -158,7 +158,7 @@
 <div id="container">
     <header>
         <h1>SOFA Score Results</h1>
-        <div id="Patient-info">
+        <div id="Patient-info" style="background: #95c2ef;">
             <p style="margin-right: 30px;">Patient Details</p>
             <p style="margin-right: 30px;">NHI: <?php echo strtoupper($nhi)?> </p>
             <p style="margin-right: 30px;">Name: <?php echo ucfirst(strtolower($fname));
@@ -171,7 +171,6 @@
         <div class ="Points-container">
             <h2>SOFA Score Components</h2>
             <h3>Total points: <?php echo $points;?>/24 </h3>
-
             <ul>
                 <li>Respritory +<?php echo $respiratoryPoints;?> points</li>
                 <li>Cardiovascular System +<?php echo $cardiovascularPoints;?> points</li>
@@ -188,6 +187,27 @@
         <div class="link">
              Click on this link to see how your score was calculated: <a href="https://en.wikipedia.org/wiki/SOFA_score" target="_blank">"https://en.wikipedia.org/wiki/SOFA_score"</a>
         </div>
+
+            <div class="button-container">
+                <div class="edit-button">
+                <button type="button" onclick="goBack()">Edit Details</button>
+                </div>
+
+
+                <div class="log-out-button">
+                    <button type="button" onclick="restart()">Log-out</button>
+                </div>
+            </div>
 </div>
+
+<script>
+    function goBack() {
+    window.history.back();
+}
+function restart() {
+    // Redirect to the index.php page
+    window.location.href = 'index.php';
+}
+</script>
 </body>
 </html>

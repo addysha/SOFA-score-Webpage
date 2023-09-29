@@ -56,10 +56,7 @@ input[type="submit"]:hover {
 /* Radio Button Label Styles */
 label[for="mechanically-vented-yes"],
 label[for="mechanically-vented-no"] {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-left: 10px; /* Add margin for spacing between the label and radio button */
+   
 }
 
 
@@ -74,6 +71,10 @@ input:valid {
 
 /* Error Message Styles */
 .error-message {
+    color: red;
+    margin-top: 10px;
+}
+.error-message-coagulation{
     color: red;
     margin-top: 10px;
 }
@@ -117,7 +118,7 @@ input:valid {
     align-content: stretch;
     justify-content: center;
     flex-direction: row;
-    background: #EFB495;
+    background: #1063b6;
 }
 
 
@@ -126,9 +127,7 @@ input:valid {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #EFB495;
     padding: 10px;
-
 }
 
 #Patient-info p {
@@ -158,8 +157,13 @@ input:valid {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -60%);
-    background: #EF9595;
     padding: 20px;
     padding-right: 200px;
     border-radius: 10px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between; /* This will evenly space the buttons */
+    margin-top: 20px; /* Adjust as needed */
 }

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +47,7 @@
             the Sequential Organ Failure Assessment (SOFA) is a medical test used to evaluate the level of organ malfunction in critically ill patients.</p>
     </header>
     <form id="form" action="sofa.php" method="post">
-        <div id="log-in">
+        <div id="log-in" style="background: #95c2ef;">
             <h2> Log-in </h2>
             <b><label for="nhi">NHI Number</label></b>
             <input id="nhi" name="nhi" type="text" value="<?php echo $nhi; ?>" style="padding: 5px; margin-bottom: 10px">
