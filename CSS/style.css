@@ -53,12 +53,6 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-/* Radio Button Label Styles */
-label[for="mechanically-vented-yes"],
-label[for="mechanically-vented-no"] {
-   
-}
-
 
 .error {
     border: 1px solid red;
